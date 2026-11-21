@@ -2,7 +2,7 @@
 
 | Criterio | Evidencia local existente | Captura remota pendiente |
 |---|---|---|
-| Branching | historial y ramas a preparar localmente | página Branches y PR `test → main` sin fusionar |
+| Branching | ramas locales `main` y `test`; commits `503c3a8`, `096b15e`, `6a3a6b5` y `fe06683` sobre `test` | página Branches y PR `test → main` sin fusionar |
 | CI/CD | `.github/workflows/ci.yml` y `deploy.yml` | runs verdes con SHA visible |
 | Pruebas | suites Jest/Supertest y Vitest | log del job con número de suites/tests |
 | Seguridad | `security.yml`, audit, CodeQL, Gitleaks | tres checks verdes y alertas revisadas |
