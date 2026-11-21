@@ -6,14 +6,21 @@ on:
     branches: [main]
 permissions: { contents: read }
 jobs:
-  deploy:
+  verify-production:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Deploy API through Render hook
-        run: curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK"
-        env: { RENDER_DEPLOY_HOOK: '${{ secrets.RENDER_DEPLOY_HOOK }}' }
-      - name: Deploy frontend through Vercel hook
-        run: curl --fail --silent --show-error --request POST "$VERCEL_DEPLOY_HOOK"
-        env: { VERCEL_DEPLOY_HOOK: '${{ secrets.VERCEL_DEPLOY_HOOK }}' }
+      - name: Wait for Render API and verify health
+        run: >-
+          curl --fail --silent --show-error
+          --retry 20 --retry-delay 15 --retry-all-errors
+          --max-time 90
+          https://limpiaconecta.onrender.com/api/health
+      - name: Wait for Vercel frontend and verify content
+        run: >-
+          curl --fail --silent --show-error
+          --retry 20 --retry-delay 15 --retry-all-errors
+          --max-time 60
+          https://l-impia-conecta.vercel.app/
+          | grep -q '<title>LimpiaConecta</title>'

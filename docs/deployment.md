@@ -1,9 +1,11 @@
 # Despliegue
 
-Estado actual: **preparado, no publicado ni verificado**. No hay URLs que declarar todavía.
+Estado: **publicado y verificado el 20-11-2026**.
 
-1. En Render, cree Blueprint desde `render.yaml`, configure `FRONTEND_URL` después de conocer Vercel, desactive Auto-Deploy y copie un Deploy Hook.
-2. En Vercel, importe el repo con Root Directory `frontend`, defina `VITE_API_URL=https://<api-render>/api`, desactive Git auto-deploy y cree Deploy Hook de producción.
-3. En GitHub Environment `production`, agregue `RENDER_DEPLOY_HOOK` y `VERCEL_DEPLOY_HOOK`.
-4. Actualice `FRONTEND_URL` en Render al dominio HTTPS exacto y despliegue otra vez.
-5. Verifique `GET https://<api>/api/health`, registro/login, publicación y solicitud desde la URL web. Recién entonces reemplace este estado por URLs y fecha verificadas.
+- Frontend Vercel: https://l-impia-conecta.vercel.app
+- API Render: https://limpiaconecta.onrender.com
+- Health: https://limpiaconecta.onrender.com/api/health — `200 {"status":"ok"}`
+
+Vercel usa Root Directory `frontend` y `VITE_API_URL=https://limpiaconecta.onrender.com/api`. Render usa Root Directory `backend`, PostgreSQL administrado, migraciones en el start command y `FRONTEND_URL=https://l-impia-conecta.vercel.app`. Ambos proveedores observan `main`; `deploy.yml` verifica frontend y API solamente después de un CI exitoso.
+
+Se comprobaron externamente HTTPS, navegación SPA, CORS, registro, login/JWT y consulta de catálogo. La cuenta ficticia de validación es `verificacion.20261120@limpiaconecta.test`. El plan gratuito de Render puede tardar cerca de un minuto en despertar y su PostgreSQL gratuito expira según las condiciones del proveedor.
