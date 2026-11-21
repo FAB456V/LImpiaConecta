@@ -40,4 +40,4 @@ Las 12 HU están cubiertas: registro/login y perfil; publicación, búsqueda, ed
 - `.github/workflows/`: CI, CodeQL/audit/Gitleaks y deploy condicionado.
 - `docs/`: arquitectura, controles y guía de evidencias.
 
-Vercel usa `frontend/` como Root Directory. Render puede crear API y PostgreSQL con `render.yaml`. Las URLs, PR y ejecuciones se mantienen como pendientes hasta verificarse; consulte [deployment](docs/deployment.md) y [evidencias](docs/evidencias.md).
+Producción verificada: [frontend en Vercel](https://l-impia-conecta.vercel.app) y [API en Render](https://limpiaconecta.onrender.com/api/health). Vercel usa `frontend/` y Render `backend/` como Root Directory. Consulte [deployment](docs/deployment.md) y [evidencias](docs/evidencias.md).
