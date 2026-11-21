@@ -1,0 +1,1 @@
+process.env.NODE_ENV='test';process.env.DATABASE_URL=process.env.DATABASE_URL||'postgresql://postgres:postgres@localhost:5433/limpiaconecta_test?schema=public';process.env.JWT_SECRET='test-secret-that-is-at-least-32-characters';process.env.FRONTEND_URL='http://localhost:5173';
