@@ -1,0 +1,2 @@
+import { render,screen } from '@testing-library/react';import { beforeEach,describe,expect,it } from 'vitest';import App from './App';
+describe('App',()=>{beforeEach(()=>{localStorage.clear();history.pushState({},'', '/')});it('muestra la propuesta de valor',()=>{render(<App/>);expect(screen.getByRole('heading',{name:/limpieza vehicular/i})).toBeInTheDocument()});it('protege el panel sin sesión',()=>{history.pushState({},'','/panel');render(<App/>);expect(screen.getByRole('heading',{name:/inicia sesión/i})).toBeInTheDocument()})});

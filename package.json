@@ -1,0 +1,1 @@
+{"name":"limpiaconecta","private":true,"workspaces":["frontend","backend"],"scripts":{"build":"npm run build -w backend && npm run build -w frontend","test":"npm run test -w backend && npm run test -w frontend","typecheck":"npm run typecheck -w backend && npm run typecheck -w frontend","audit:ci":"npm audit --audit-level=high"},"engines":{"node":">=20"}}

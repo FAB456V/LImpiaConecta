@@ -1,0 +1,19 @@
+name: Deploy production
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+permissions: { contents: read }
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Deploy API through Render hook
+        run: curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK"
+        env: { RENDER_DEPLOY_HOOK: '${{ secrets.RENDER_DEPLOY_HOOK }}' }
+      - name: Deploy frontend through Vercel hook
+        run: curl --fail --silent --show-error --request POST "$VERCEL_DEPLOY_HOOK"
+        env: { VERCEL_DEPLOY_HOOK: '${{ secrets.VERCEL_DEPLOY_HOOK }}' }
